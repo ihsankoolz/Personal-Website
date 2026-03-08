@@ -2,31 +2,94 @@
 @import './tailwind.css';
 @import './theme.css';
 
-/* Custom scrollbar styles */
-::-webkit-scrollbar {
-  width: 10px;
+/* ═══════════════════════════════════════════════
+   SIGNAL NOIR — Portfolio Design System
+   ═══════════════════════════════════════════════ */
+
+:root {
+  --noir-bg: #08080A;
+  --noir-surface: #111114;
+  --noir-surface-hover: #1A1A1E;
+  --noir-text: #E8E2D6;
+  --noir-text-secondary: #918B7F;
+  --noir-text-muted: #5A5650;
+  --noir-accent: #E05A33;
+  --noir-accent-dim: rgba(224, 90, 51, 0.15);
+  --noir-border: #1F1F24;
+  --noir-border-hover: #2E2E35;
 }
 
-::-webkit-scrollbar-track {
-  background: #0a0a0a;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #00E5BE;
-  border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #00c4a3;
-}
-
-/* Smooth scroll behavior */
 html {
   scroll-behavior: smooth;
 }
 
-/* Selection color */
 ::selection {
-  background: #00E5BE;
-  color: #0a0a0a;
+  background: var(--noir-accent);
+  color: var(--noir-bg);
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--noir-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--noir-border-hover);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--noir-text-muted);
+}
+
+/* Film grain overlay */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  pointer-events: none;
+  opacity: 0.028;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+}
+
+/* Dot grid texture */
+.dot-grid-bg {
+  background-image: radial-gradient(circle, var(--noir-border) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Accent horizontal rule */
+.accent-rule {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--noir-accent) 20%, var(--noir-accent) 80%, transparent 100%);
+  opacity: 0.4;
+}
+
+/* Vertical writing for side elements */
+.writing-vertical {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+/* Link underline reveal */
+.link-reveal {
+  position: relative;
+  text-decoration: none;
+}
+.link-reveal::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--noir-accent);
+  transition: width 0.3s ease;
+}
+.link-reveal:hover::after {
+  width: 100%;
 }

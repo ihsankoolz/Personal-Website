@@ -1,11 +1,25 @@
+# ihsan-portfolio
 
-  # Review Instructions
+Personal portfolio website for Ihsan Alfian — built with React, Vite, TypeScript, and TailwindCSS.
 
-  This is a code bundle for Review Instructions. The original project is available at https://www.figma.com/design/IBdGRKZMVcPoTMMTnhuk7v/Review-Instructions.
+## Stack
 
-  ## Running the code
+- React 18 + TypeScript
+- Vite 6
+- TailwindCSS 4
+- Motion (Framer Motion)
+- Anime.js
+- Recharts
 
-  Run `npm i` to install the dependencies.
+## Development
 
-  Run `npm run dev` to start the development server.
-  
+```bash
+npm install
+npm run dev
+```
+
+## Build
+
+```bash
+npm run build
+```

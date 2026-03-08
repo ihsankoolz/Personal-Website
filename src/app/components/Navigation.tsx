@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X } from 'lucide-react';
 
 const navItems = [
-  { label: 'About', href: '#about', number: '01' },
-  { label: 'Skills', href: '#skills', number: '02' },
-  { label: 'Projects', href: '#projects', number: '03' },
-  { label: 'Experience', href: '#experience', number: '04' },
-  { label: 'Contact', href: '#contact', number: '05' },
+  { label: 'About', href: '#about' },
+  { label: 'Projects', href: '#projects' },
+  { label: 'Experience', href: '#experience' },
+  { label: 'Skills', href: '#skills' },
+  { label: 'Contact', href: '#contact' },
 ];
 
 export function Navigation() {
@@ -15,122 +14,106 @@ export function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setIsMobileMenuOpen(false);
-    }
+    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+    setIsMobileMenuOpen(false);
   };
 
   return (
     <>
       <motion.nav
-        initial={{ y: -100, opacity: 0 }}
+        initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, delay: 0.2 }}
-        className={`fixed top-0 left-0 right-0 z-50 px-6 py-6 transition-all duration-300 ${
+        transition={{ duration: 0.8, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
+        className={`fixed top-0 left-0 right-0 z-50 px-6 lg:px-12 transition-all duration-500 ${
           isScrolled
-            ? 'bg-[#0a0a0a]/95 backdrop-blur-md shadow-lg'
-            : 'bg-transparent'
+            ? 'py-4 bg-[var(--noir-bg)]/90 backdrop-blur-md border-b border-[var(--noir-border)]'
+            : 'py-6 bg-transparent'
         }`}
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between">
+          {/* Logo */}
           <a
             href="#hero"
-            onClick={(e) => {
-              e.preventDefault();
-              scrollToSection('#hero');
-            }}
-            className="text-2xl text-[#00E5BE] hover:opacity-80 transition-opacity cursor-pointer"
+            onClick={(e) => { e.preventDefault(); scrollToSection('#hero'); }}
+            className="group cursor-pointer"
           >
-            {'<YN />'}
+            <span className="text-[var(--noir-text)] text-sm tracking-[0.2em] uppercase font-medium group-hover:text-[var(--noir-accent)] transition-colors duration-300">
+              Muhammad Ihsan Bin Alfian
+            </span>
+            <span className="text-[var(--noir-accent)] ml-1">.</span>
           </a>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          {/* Desktop nav */}
+          <div className="hidden md:flex items-center gap-10">
             {navItems.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection(item.href);
-                }}
-                className="text-gray-300 hover:text-[#00E5BE] transition-colors cursor-pointer group"
+                onClick={(e) => { e.preventDefault(); scrollToSection(item.href); }}
+                className="link-reveal text-[var(--noir-text-secondary)] hover:text-[var(--noir-text)] transition-colors duration-300 text-xs tracking-[0.15em] uppercase cursor-pointer"
               >
-                <span className="text-[#00E5BE] mr-1">{item.number}.</span>
-                <span className="group-hover:underline underline-offset-4">
-                  {item.label}
-                </span>
+                {item.label}
               </a>
             ))}
-            <a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-4 py-2 border border-[#00E5BE] text-[#00E5BE] rounded hover:bg-[#00E5BE]/10 transition-colors"
-            >
-              Resume
-            </a>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile toggle */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden text-[#00E5BE] hover:opacity-80 transition-opacity"
+            className="md:hidden text-[var(--noir-text)] hover:text-[var(--noir-accent)] transition-colors w-8 h-8 flex flex-col items-end justify-center gap-1.5"
             aria-label="Toggle menu"
           >
-            {isMobileMenuOpen ? (
-              <X className="h-6 w-6" />
-            ) : (
-              <Menu className="h-6 w-6" />
-            )}
+            <motion.span
+              animate={isMobileMenuOpen ? { rotate: 45, y: 5, width: '100%' } : { rotate: 0, y: 0, width: '100%' }}
+              className="block h-px bg-current origin-center"
+              style={{ width: '100%' }}
+            />
+            <motion.span
+              animate={isMobileMenuOpen ? { opacity: 0, x: 10 } : { opacity: 1, x: 0 }}
+              className="block h-px bg-current"
+              style={{ width: '60%' }}
+            />
+            <motion.span
+              animate={isMobileMenuOpen ? { rotate: -45, y: -7, width: '100%' } : { rotate: 0, y: 0, width: '100%' }}
+              className="block h-px bg-current origin-center"
+              style={{ width: '80%' }}
+            />
           </button>
         </div>
       </motion.nav>
 
-      {/* Mobile Menu */}
+      {/* Mobile menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, x: '100%' }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: '100%' }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 md:hidden bg-[#0a0a0a]/98 backdrop-blur-lg"
+            className="fixed inset-0 z-40 md:hidden bg-[var(--noir-bg)]/98 backdrop-blur-xl"
           >
-            <div className="flex flex-col items-center justify-center h-full gap-8">
-              {navItems.map((item) => (
-                <a
+            <div className="flex flex-col items-center justify-center h-full gap-10">
+              {navItems.map((item, i) => (
+                <motion.a
                   key={item.href}
                   href={item.href}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSection(item.href);
-                  }}
-                  className="text-2xl text-gray-300 hover:text-[#00E5BE] transition-colors cursor-pointer"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 10 }}
+                  transition={{ delay: i * 0.08 }}
+                  onClick={(e) => { e.preventDefault(); scrollToSection(item.href); }}
+                  className="text-2xl text-[var(--noir-text)] hover:text-[var(--noir-accent)] transition-colors cursor-pointer"
+                  style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic' }}
                 >
-                  <span className="text-[#00E5BE] mr-2">{item.number}.</span>
                   {item.label}
-                </a>
+                </motion.a>
               ))}
-              <a
-                href="/resume.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-4 px-6 py-3 border-2 border-[#00E5BE] text-[#00E5BE] rounded text-xl hover:bg-[#00E5BE]/10 transition-colors"
-              >
-                Resume
-              </a>
             </div>
           </motion.div>
         )}

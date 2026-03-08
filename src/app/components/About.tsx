@@ -10,38 +10,35 @@ export function About() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting && sectionRef.current) {
-            const textElements = sectionRef.current.querySelectorAll('.about-text p');
-            const techItems = sectionRef.current.querySelectorAll('.tech-item');
+            const paras = sectionRef.current.querySelectorAll('.about-p');
+            const img = sectionRef.current.querySelector('.about-img');
 
-            if (textElements.length > 0) {
-              animate(textElements, {
+            if (paras.length > 0) {
+              animate(paras, {
                 opacity: [0, 1],
                 translateY: [30, 0],
-                delay: stagger(100),
-                duration: 800,
-                easing: 'out-expo',
+                delay: stagger(120, { start: 200 }),
+                duration: 900,
+                easing: 'out(3)',
               });
             }
 
-            if (techItems.length > 0) {
-              animate(techItems, {
+            if (img) {
+              animate(img, {
                 opacity: [0, 1],
-                scale: [0.8, 1],
-                delay: stagger(50, { start: 400 }),
-                duration: 600,
-                easing: 'out-expo',
+                scale: [0.96, 1],
+                delay: 400,
+                duration: 1000,
+                easing: 'out(3)',
               });
             }
           }
         });
       },
-      { threshold: 0.3 }
+      { threshold: 0.25 }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
+    if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
 
@@ -49,71 +46,73 @@ export function About() {
     <section
       id="about"
       ref={sectionRef}
-      className="min-h-screen flex items-center px-6 py-24"
+      className="min-h-screen flex items-center px-6 lg:px-24 py-32"
     >
-      <div className="max-w-4xl w-full mx-auto">
-        <motion.h2
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6 }}
+      <div className="max-w-6xl w-full mx-auto">
+        {/* Section header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
           viewport={{ once: true }}
-          className="text-3xl md:text-4xl mb-12 text-gray-100 flex items-center gap-4"
+          className="flex items-center gap-6 mb-16"
         >
-          <span className="text-[#00E5BE]">01.</span> About Me
-          <span className="h-px bg-gray-700 flex-1 ml-4"></span>
-        </motion.h2>
+          <span className="text-[var(--noir-accent)] text-sm md:text-base tracking-[0.25em] uppercase">
+            About
+          </span>
+          <span className="flex-1 h-px bg-[var(--noir-border)]" />
+        </motion.div>
 
-        <div className="grid md:grid-cols-[2fr_1fr] gap-12 items-start">
-          <div className="space-y-4 about-text">
-            <p className="text-gray-400 text-lg leading-relaxed opacity-0">
-              I'm a second-year student at Singapore Management University,
-              pursuing a degree in Software Engineering with a deep focus on
-              quantitative finance and machine learning. What started as
-              curiosity about how markets work has evolved into a passion for
-              building intelligent trading systems.
+        <div className="grid lg:grid-cols-[1fr_340px] gap-16 items-start">
+          {/* Text column */}
+          <div className="space-y-6">
+            <p className="about-p opacity-0 text-[var(--noir-text-secondary)] text-base leading-[1.8]">
+              I'm a second-year Information Systems student at Singapore Management
+              University, specialising in Business Analytics. What started as curiosity
+              about how markets work has evolved into a passion for building intelligent
+              trading systems that sit at the intersection of{' '}
+              <span className="text-[var(--noir-text)]">software engineering</span> and{' '}
+              <span className="text-[var(--noir-text)]">quantitative finance</span>.
             </p>
 
-            <p className="text-gray-400 text-lg leading-relaxed opacity-0">
-              My journey led me to develop AlphaForge, a quantitative trading
-              platform implementing multiple strategy engines with impressive
-              risk-adjusted returns. I'm currently self-teaching C++ to prepare
-              for quant developer roles and exploring advanced ML techniques for
-              alpha generation. I placed Top 8 at the Ripple RLFactor Hackathon,
-              competing against teams from across Asia.
+            <p className="about-p opacity-0 text-[var(--noir-text-secondary)] text-base leading-[1.8]">
+              Beyond quant finance, I care about building things that matter. I led
+              finance and logistics for a{' '}
+              <span className="text-[var(--noir-text)]">$35,000+</span> community service
+              expedition to rural Laos, and I serve as Public Relations Director at SMU's
+              Business Intelligence &amp; Analytics Club, connecting{' '}
+              <span className="text-[var(--noir-text)]">500+ members</span> with industry
+              practitioners.
             </p>
 
-            <p className="text-gray-400 text-lg leading-relaxed opacity-0">
-              Beyond finance, I love solving complex algorithmic problems,
-              contributing to open source, and building tools that make
-              developers' lives easier. When I'm not coding, you'll find me
-              reading research papers on market microstructure or tinkering with
-              new tech stacks.
-            </p>
-
-            <p className="text-gray-400 text-lg leading-relaxed opacity-0">
-              I'm currently seeking summer 2027 internships in quantitative
-              trading, software engineering, or ML engineering roles where I can
-              apply my skills at scale.
+            <p className="about-p opacity-0 text-[var(--noir-text-secondary)] text-base leading-[1.8]">
+              I'm currently open to{' '}
+              <span className="text-[var(--noir-accent)]">
+                Summer 2026 and 2026 off-cycle (Aug - Dec) internship opportunities
+              </span>{' '}
+              in software engineering, or ML engineering — anywhere
+              I can build meaningful things at scale.
             </p>
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="relative group"
-          >
-            <div className="aspect-square rounded-lg overflow-hidden border-2 border-[#00E5BE] relative">
-              <div className="absolute inset-0 bg-[#00E5BE]/20 group-hover:bg-transparent transition-colors duration-300"></div>
+          {/* Photo */}
+          <div className="about-img opacity-0 relative">
+            <div className="aspect-[3/4] bg-[var(--noir-surface)] overflow-hidden relative group">
               <img
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop"
-                alt="Profile"
-                className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-300"
+                src= '/images/profile.jpg'
+                alt="Ihsan Alfian"
+                className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100"
               />
+              {/* Overlay tint */}
+              <div className="absolute inset-0 bg-[var(--noir-accent)]/10 mix-blend-multiply group-hover:opacity-0 transition-opacity duration-700" />
             </div>
-            <div className="absolute inset-0 border-2 border-[#00E5BE] rounded-lg translate-x-4 translate-y-4 -z-10 group-hover:translate-x-3 group-hover:translate-y-3 transition-transform duration-300"></div>
-          </motion.div>
+            {/* Offset border frame */}
+            <div className="absolute -bottom-3 -right-3 w-full h-full border border-[var(--noir-accent)]/30 -z-10" />
+            {/* Small label */}
+            <div className="absolute -bottom-8 left-0 text-[10px] tracking-[0.2em] uppercase text-[var(--noir-text-muted)]">
+              Singapore, 2025
+            </div>
+          </div>
         </div>
       </div>
     </section>
