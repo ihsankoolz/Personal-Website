@@ -34,7 +34,7 @@ export function Contact() {
           </h2>
 
           <p className="text-[var(--noir-text-secondary)] max-w-lg mb-14 text-sm leading-relaxed">
-            I'm actively looking for internship opportunities in quantitative trading,
+            I'm actively looking for internship opportunities in 
             software engineering, and machine learning for Summer 2026 and 2027.
             Whether you have an opportunity or just want to say hi — my inbox is
             always open.

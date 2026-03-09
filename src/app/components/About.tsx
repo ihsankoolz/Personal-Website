@@ -76,7 +76,7 @@ export function About() {
             </p>
 
             <p className="about-p opacity-0 text-[var(--noir-text-secondary)] text-base leading-[1.8]">
-              Beyond quant finance, I care about building things that matter. I led
+              Beyond academics, I care about building things that matter. I led
               finance and logistics for a{' '}
               <span className="text-[var(--noir-text)]">$35,000+</span> community service
               expedition to rural Laos, and I serve as Public Relations Director at SMU's

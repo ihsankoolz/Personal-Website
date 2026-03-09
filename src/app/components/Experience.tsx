@@ -7,9 +7,9 @@ const experiences = [
   {
     year: '2026 / 2027',
     title: 'Seeking Internship',
-    organization: 'Quant Development · Software Engineering · ML Engineering',
+    organization: 'Software Engineering · ML Engineering',
     description:
-      'Open to Summer 2026 and 2026 off-cycle(Aug-Dec) internship opportunities where I can apply my skills in quantitative finance, machine learning, and full-stack engineering at scale.',
+      'Open to Summer 2026 and 2026 off-cycle(Aug-Dec) internship opportunities where I can apply my skills in machine learning, and full-stack engineering at scale.',
     icon: Briefcase,
     type: 'future',
   },
@@ -132,14 +132,14 @@ export function Experience() {
               return (
                 <div
                   key={idx}
-                  className="exp-item opacity-0 relative pl-12 group"
+                  className="exp-item opacity-0 relative pl-12"
                 >
                   {/* Timeline dot */}
-                  <div className="absolute left-0 top-1.5 w-[15px] h-[15px] border border-[var(--noir-border-hover)] bg-[var(--noir-bg)] flex items-center justify-center group-hover:border-[var(--noir-accent)] transition-colors duration-300">
-                    <div className="w-[5px] h-[5px] bg-[var(--noir-accent)] opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute left-0 top-1.5 w-[15px] h-[15px] border border-[var(--noir-border-hover)] bg-[var(--noir-bg)] flex items-center justify-center transition-colors duration-300">
+                    <div className="w-[5px] h-[5px] bg-[var(--noir-accent)] opacity-60 transition-opacity duration-300" />
                   </div>
 
-                  <div className="border border-[var(--noir-border)] bg-[var(--noir-surface)]/30 backdrop-blur-sm hover:bg-[var(--noir-surface)]/80 p-6 hover:border-[var(--noir-border-hover)] transition-all duration-500">
+                  <div className="group border border-[var(--noir-border)] bg-[var(--noir-surface)]/40 backdrop-blur-sm hover:bg-[var(--noir-surface)]/80 p-6 hover:border-[var(--noir-border-hover)] transition-all duration-500">
                     {/* Year + icon row */}
                     <div className="flex items-center justify-between mb-3">
                       <span className="text-[10px] tracking-[0.2em] uppercase text-[var(--noir-text-muted)] group-hover:text-[var(--noir-text-secondary)] transition-colors duration-300">
@@ -157,7 +157,7 @@ export function Experience() {
                     <div className="text-[var(--noir-text-secondary)] text-sm mb-3 group-hover:text-[var(--noir-text)] transition-colors duration-300">
                       {exp.organization}
                     </div>
-                    <p className="text-[var(--noir-text-muted)] text-sm leading-relaxed group-hover:text-[var(--noir-text-secondary)] transition-colors duration-300">
+                    <p className="text-[var(--noir-text-muted)] text-sm leading-relaxed group-hover:text-[var(--noir-text)] transition-colors duration-300">
                       {exp.description}
                     </p>
                   </div>
